@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     [Header("Gravity Parameters")]
     [SerializeField] private float _initGravityScale = 5.35f;
     [SerializeField] private float _gravityScaleOnFall = 3.5f;
-    private float _currentGravityScale => _rigidbody.gravityScale;
 
     [Header("Jump Buffering Parameters")]
     [SerializeField] private float _jumpBufferTime = 0.14f;
