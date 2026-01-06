@@ -17,11 +17,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _movingSpeed = 5;
     [SerializeField] private float _jumpForce = 12f;
     [SerializeField] private float _jumpAirHandlingForce = 33f;
+    [SerializeField] private float _xMinVelocity = -20;
+    [SerializeField] private float _xMaxVelocity = 20;
+    [SerializeField] private float _yMinVelocity = -13;
+    [SerializeField] private float _yMaxVelocity = 40;
     [SerializeField] private bool _hasJump = false;
-    private float _xMinVelocity = -20;
-    private float _xMaxVelocity = 20;
-    private float _yMinVelocity = -13;
-    private float _yMaxVelocity = 40;
 
     private bool _isJumpTriggered = false;
     private bool _isJumpgHanndlingTriggered = false;
@@ -31,18 +31,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _gravityScaleOnFall = 3.5f;
     private float _currentGravityScale => _rigidbody.gravityScale;
 
-    // Parameter for coyote jump and jump buffering 
-    private float _jumpBufferTime = 0.14f;
-    private float _currentJumpBufferTime = 0;
+    [Header("Jump Buffering Parameters")]
+    [SerializeField] private float _jumpBufferTime = 0.14f;
+    [SerializeField] private float _currentJumpBufferTime = 0;
 
-    private float _coyoteTime = 0.13f;
-    private float _currentCoyoteTime = 0.0f;
+    [Header("Coyote Jump Parameters")]
+    [SerializeField] private float _coyoteTime = 0.13f;
+    [SerializeField] private float _currentCoyoteTime = 0.0f;
     private bool _hasStartedCoyoteTimer = false;
-    
-
-    public bool canJumpHigher = true;
-    [Header("Sounds")]
-    [SerializeField] private AudioClip[] _jumpAudioClip;
+    private bool _canJumpHigher = true;
 
 
 
@@ -74,38 +71,35 @@ public class PlayerController : MonoBehaviour
 
         if (_direction == 1 || _direction == -1)
         {
-            _rigidbody.velocity = new Vector2(_movingSpeed * _direction, _rigidbody.velocity.y);
+            _rigidbody.linearVelocity = new Vector2(_movingSpeed * _direction, _rigidbody.linearVelocity.y);
         }
         else
         {
-            _rigidbody.velocity = new Vector2(0, _rigidbody.velocity.y);
+            _rigidbody.linearVelocity = new Vector2(0, _rigidbody.linearVelocity.y);
 
         }
 
     }
 
-    void Update()
+    private void Update()
     {
+        if (PlayerManager.Instance.IsPlayerDead is false)
+        {
+            HandleWalkMovement();
 
+            HandleJumpBuffering();
 
+            HandleCoyoteJump();
 
-        //if (!_playerManager.m_deathState)
-        //{
-        //    HandleWalkMovement();
+            HandleJump();
 
-        //    HandleJumpBuffering();
+            HandleGravityChanges();
 
-        //    HandleCoyoteJump();
+            // Turn on jump animation :   if (!_isGrounded) _animator.SetInteger("playerState", 2); 
 
-        //    HandleJump();
+            HandleFlip();
 
-        //    HandleGravityChanges();
-
-        //    if (!_isGrounded) _animator.SetInteger("playerState", 2); // Turn on jump animation
-
-        //    HandleFlip();
-
-        //}
+        }
     }
 
     private void HandleWalkMovement()
@@ -115,11 +109,11 @@ public class PlayerController : MonoBehaviour
             _moveInput = Input.GetAxis("Horizontal");
             if (_moveInput > 0) _direction = 1;
             else if (_moveInput < 0) _direction = -1;
-            _animator.SetInteger("playerState", 1); // Turn on run animation
+            // Turn on run animation :   _animator.SetInteger("playerState", 1);
         }
         else
         {
-            if (_isGrounded) _animator.SetInteger("playerState", 0); // Turn on idle animation
+            // Turn on idle animation :   if (_isGrounded) _animator.SetInteger("playerState", 0);
             _direction = 0;
         }
     }
@@ -144,7 +138,7 @@ public class PlayerController : MonoBehaviour
 
         _isGrounded = raycastHitGround.collider != null;
 
-        if (_isGrounded) canJumpHigher = true;
+        if (_isGrounded) _canJumpHigher = true;
 
 
     }
@@ -152,29 +146,40 @@ public class PlayerController : MonoBehaviour
     #region Rigibody modification related methods
     private void ClampVelocity()
     {
-        Vector2 velocity = _rigidbody.velocity;
+        Vector2 velocity = _rigidbody.linearVelocity;
 
         velocity.x = Mathf.Clamp(velocity.x, _xMinVelocity, _xMaxVelocity);
         velocity.y = Mathf.Clamp(velocity.y, _yMinVelocity, _yMaxVelocity);
 
-        _rigidbody.velocity = velocity;
+        _rigidbody.linearVelocity = velocity;
     }
 
     private void HandleGravityChanges()
     {
         // Increase gravity when the player fall, otherwise will set its normal gravity
-        if (!_isGrounded && _rigidbody.velocity.y <= 0 && _rigidbody.gravityScale != _gravityScaleOnFall)
+        if (!_isGrounded && _rigidbody.linearVelocity.y <= 0 && _rigidbody.gravityScale != _gravityScaleOnFall)
         {
             _rigidbody.gravityScale = _gravityScaleOnFall;
         }
-        else if (!_isGrounded && _rigidbody.velocity.y > 0 && _rigidbody.gravityScale != _initGravityScale)
+        else if (!_isGrounded && _rigidbody.linearVelocity.y > 0 && _rigidbody.gravityScale != _initGravityScale)
         {
             _rigidbody.gravityScale = _initGravityScale;
         }
     }
     #endregion
 
-    #region Jump related methods
+    #region Jump Methods
+
+    private void Jump()
+    {
+        _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, 0);
+        _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
+        _isGrounded = false;
+        _hasJump = true;
+        _currentCoyoteTime = 0;
+
+        SoundManager.Instance.PlaySound("jump_sfx");
+    }
     private void HandleJumpBuffering()
     {
         _currentJumpBufferTime -= Time.deltaTime;
@@ -201,7 +206,7 @@ public class PlayerController : MonoBehaviour
             _isGrounded = false;
             _hasJump = true;
         }
-        else if (Input.GetKey(KeyCode.Space) && !_isGrounded && _hasJump && _rigidbody.velocity.y > 0 && canJumpHigher)
+        else if (Input.GetKey(KeyCode.Space) && !_isGrounded && _hasJump && _rigidbody.linearVelocity.y > 0 && _canJumpHigher)
         {
             _isJumpgHanndlingTriggered = true;
         }
@@ -211,21 +216,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Jump()
-    {
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
-        _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
-        _isGrounded = false;
-        _hasJump = true;
-        _currentCoyoteTime = 0;
-
-        SoundManager.Instance.PlaySound("jump_sfx");
-    }
-
     private void HandleCoyoteJump()
     {
         // Start corote timer when player leave the ground
-        if (!_isGrounded && !_hasStartedCoyoteTimer && _rigidbody.velocity.y < 0 && _currentCoyoteTime == 0)
+        if (!_isGrounded && !_hasStartedCoyoteTimer && _rigidbody.linearVelocity.y < 0 && _currentCoyoteTime == 0)
         {
             _currentCoyoteTime = _coyoteTime;
             _hasStartedCoyoteTimer = true;
