@@ -89,23 +89,23 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (!_playerManager.m_deathState)
-        {
-            HandleWalkMovement();
+        //if (!_playerManager.m_deathState)
+        //{
+        //    HandleWalkMovement();
 
-            HandleJumpBuffering();
+        //    HandleJumpBuffering();
 
-            HandleCoyoteJump();
+        //    HandleCoyoteJump();
 
-            HandleJump();
+        //    HandleJump();
 
-            HandleGravityChanges();
+        //    HandleGravityChanges();
 
-            if (!_isGrounded) _animator.SetInteger("playerState", 2); // Turn on jump animation
+        //    if (!_isGrounded) _animator.SetInteger("playerState", 2); // Turn on jump animation
 
-            HandleFlip();
+        //    HandleFlip();
 
-        }
+        //}
     }
 
     private void HandleWalkMovement()
@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour
         _hasJump = true;
         _currentCoyoteTime = 0;
 
-        AudioManager.Instance.RandomSoundEffect(_jumpAudioClip);
+        SoundManager.Instance.PlaySound("jump_sfx");
     }
 
     private void HandleCoyoteJump()
