@@ -24,7 +24,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _xMaxVelocity = 20;
     [SerializeField] private float _yMinVelocity = -13;
     [SerializeField] private float _yMaxVelocity = 40;
-    [SerializeField] private bool _hasJump = false;
+
+    [Header("Horizontal Movement Feel")]
+    [SerializeField] private float _acceleration = 60f;
+    [SerializeField] private float _deceleration = 80f;
 
     private bool _isJumpTriggered = false;
     private bool _isJumpgHanndlingTriggered = false;
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
     [Header("Coyote Jump Parameters")]
     [SerializeField] private float _coyoteTime = 0.13f;
     [SerializeField] private float _currentCoyoteTime = 0.0f;
+    private bool _hasJump = false;
     private bool _hasStartedCoyoteTimer = false;
     private bool _canJumpHigher = true;
 
@@ -90,7 +94,13 @@ public class PlayerController : MonoBehaviour
             _rigidbody.AddForce(transform.up * _jumpAirHandlingForce, ForceMode2D.Force);
         }
 
-        _rigidbody.linearVelocity = new Vector2(_moveInput.x * _movingSpeed, _rigidbody.linearVelocity.y);
+        float targetSpeed = _moveInput.x * _movingSpeed;
+
+        float accel = Mathf.Abs(_moveInput.x) > 0.01f? _acceleration : _deceleration;
+
+        float newX = Mathf.MoveTowards(_rigidbody.linearVelocity.x, targetSpeed, accel * Time.fixedDeltaTime);
+
+        _rigidbody.linearVelocity = new Vector2(newX, _rigidbody.linearVelocity.y);
 
         ClampVelocity();
     }
