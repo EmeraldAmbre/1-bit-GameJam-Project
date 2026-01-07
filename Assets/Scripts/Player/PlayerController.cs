@@ -1,11 +1,14 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
 
-    private float _moveInput;
+    private Vector2 _moveInput;
+    private bool _jumpPressed;
+    private bool _jumpHeld;
+    private bool _jumpReleased;
     private bool _isGrounded;
-    private float _direction = 1;
 
     private Rigidbody2D _rigidbody;
     [SerializeField] private BoxCollider2D _groundCollider;
@@ -40,13 +43,36 @@ public class PlayerController : MonoBehaviour
     private bool _hasStartedCoyoteTimer = false;
     private bool _canJumpHigher = true;
 
+    private InputSystem_Actions _input;
 
+    private void InitInput()
+    {
+        _input = new();
+        _input.Player.Jump.started += OnPerformJumpStarted;
+        _input.Player.Jump.canceled += OnPerformJumpCanceled;
+        _input.Player.Move.performed += OnPerformMove;
+        _input.Player.Move.canceled += OnPerformMoveCanceled;
+        _input.Enable();
+    }
+
+    private void OnDestroy()
+    {
+        _input.Player.Jump.started -= OnPerformJumpStarted;
+        _input.Player.Jump.canceled -= OnPerformJumpCanceled;
+        _input.Player.Move.performed -= OnPerformMove;
+        _input.Player.Disable();
+    }
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _rigidbody.gravityScale = _initGravityScale;
+    }
+
+    private void Awake()
+    {
+        InitInput();
     }
 
     private void FixedUpdate()
@@ -64,66 +90,54 @@ public class PlayerController : MonoBehaviour
             _rigidbody.AddForce(transform.up * _jumpAirHandlingForce, ForceMode2D.Force);
         }
 
+        _rigidbody.linearVelocity = new Vector2(_moveInput.x * _movingSpeed, _rigidbody.linearVelocity.y);
+
         ClampVelocity();
-
-
-
-        if (_direction == 1 || _direction == -1)
-        {
-            _rigidbody.linearVelocity = new Vector2(_movingSpeed * _direction, _rigidbody.linearVelocity.y);
-        }
-        else
-        {
-            _rigidbody.linearVelocity = new Vector2(0, _rigidbody.linearVelocity.y);
-
-        }
-
     }
 
     private void Update()
     {
-        if (PlayerManager.Instance.IsPlayerDead is false)
-        {
-            HandleWalkMovement();
+        if (PlayerManager.Instance.IsPlayerDead)
+            return;
 
-            HandleJumpBuffering();
+        HandleWalkMovement();
+        HandleJumpBuffering();
+        HandleCoyoteJump();
+        HandleJump();
+        HandleGravityChanges();
+        HandleFlip();
+    }
 
-            HandleCoyoteJump();
+    private void OnPerformMove(InputAction.CallbackContext ctx)
+    {
+        _moveInput = ctx.ReadValue<Vector2>();
+    }
 
-            HandleJump();
-
-            HandleGravityChanges();
-
-            // Turn on jump animation :   if (!_isGrounded) _animator.SetInteger("playerState", 2); 
-
-            HandleFlip();
-
-        }
+    private void OnPerformMoveCanceled(InputAction.CallbackContext ctx)
+    {
+        _moveInput = Vector2.zero;
     }
 
     private void HandleWalkMovement()
     {
-        if (Input.GetButton("Horizontal"))
+        if (Mathf.Abs(_moveInput.x) > 0.01f)
         {
-            _moveInput = Input.GetAxis("Horizontal");
-            if (_moveInput > 0) _direction = 1;
-            else if (_moveInput < 0) _direction = -1;
             // Turn on run animation :   _animator.SetInteger("playerState", 1);
         }
         else
         {
             // Turn on idle animation :   if (_isGrounded) _animator.SetInteger("playerState", 0);
-            _direction = 0;
         }
     }
 
     private void HandleFlip()
     {
-        Vector3 Scaler = transform.localScale;
-        if (_direction > 0) Scaler.x = Mathf.Abs(Scaler.x);
-        else if (_direction < 0) Scaler.x = -Mathf.Abs(Scaler.x);
-        transform.localScale = Scaler;
+        if (Mathf.Abs(_moveInput.x) < 0.01f)
+            return;
 
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * Mathf.Sign(_moveInput.x);
+        transform.localScale = scale;
     }
 
     private void CheckGround()
@@ -138,8 +152,6 @@ public class PlayerController : MonoBehaviour
         _isGrounded = raycastHitGround.collider != null;
 
         if (_isGrounded) _canJumpHigher = true;
-
-
     }
 
     #region Rigibody modification related methods
@@ -169,6 +181,17 @@ public class PlayerController : MonoBehaviour
 
     #region Jump Methods
 
+    private void OnPerformJumpStarted(InputAction.CallbackContext ctx)
+    {
+        _jumpPressed = true;
+        _jumpHeld = true;
+    }
+    private void OnPerformJumpCanceled(InputAction.CallbackContext ctx)
+    {
+        _jumpHeld = false;
+        _jumpReleased = true;
+        _canJumpHigher = false;
+    }
     private void Jump()
     {
         _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, 0);
@@ -179,10 +202,35 @@ public class PlayerController : MonoBehaviour
 
         SoundManager.Instance.PlaySound("jump_sfx");
     }
+    private void HandleJump()
+    {
+        if (_isGrounded && _hasJump)
+        {
+            _hasJump = false;
+        }
+
+        if (_jumpPressed && _isGrounded)
+        {
+            _isJumpTriggered = true;
+            _isGrounded = false;
+            _hasJump = true;
+        }
+        else if (_jumpHeld && !_isGrounded && _hasJump && _rigidbody.linearVelocity.y > 0 && _canJumpHigher)
+        {
+            _isJumpgHanndlingTriggered = true;
+        }
+        else
+        {
+            _isJumpgHanndlingTriggered = false;
+        }
+
+        _jumpPressed = false;
+    }
     private void HandleJumpBuffering()
     {
         _currentJumpBufferTime -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Space) && !_isGrounded)
+
+        if (_jumpPressed && !_isGrounded)
         {
             _currentJumpBufferTime = _jumpBufferTime;
         }
@@ -192,59 +240,37 @@ public class PlayerController : MonoBehaviour
             _isJumpTriggered = true;
             _isGrounded = false;
             _hasJump = true;
+            _currentJumpBufferTime = 0;
         }
     }
-
-    private void HandleJump()
-    {
-        if (_isGrounded && _hasJump) _hasJump = false;
-
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
-        {
-            _isJumpTriggered = true;
-            _isGrounded = false;
-            _hasJump = true;
-        }
-        else if (Input.GetKey(KeyCode.Space) && !_isGrounded && _hasJump && _rigidbody.linearVelocity.y > 0 && _canJumpHigher)
-        {
-            _isJumpgHanndlingTriggered = true;
-        }
-        else
-        {
-            _isJumpgHanndlingTriggered = false;
-        }
-    }
-
     private void HandleCoyoteJump()
     {
         // Start corote timer when player leave the ground
-        if (!_isGrounded && !_hasStartedCoyoteTimer && _rigidbody.linearVelocity.y < 0 && _currentCoyoteTime == 0)
+        if (!_isGrounded && !_hasStartedCoyoteTimer && _rigidbody.linearVelocity.y < 0)
         {
             _currentCoyoteTime = _coyoteTime;
             _hasStartedCoyoteTimer = true;
         }
 
         // Check jump on coyote timer on
-        if (Input.GetKeyDown(KeyCode.Space) && _currentCoyoteTime > 0 && !_hasJump)
+        if (_jumpPressed && _currentCoyoteTime > 0 && !_hasJump)
         {
             _isJumpTriggered = true;
             _isGrounded = false;
             _hasJump = true;
+            _currentCoyoteTime = 0;
         }
 
         // Reset coyotetimer on ground
-        if (_isGrounded && _hasStartedCoyoteTimer)
-        {
-            _hasStartedCoyoteTimer = false;
-        }
-
         if (_isGrounded)
         {
+            _hasStartedCoyoteTimer = false;
             _currentCoyoteTime = 0;
         }
+
         else if (_hasStartedCoyoteTimer)
         {
-            _currentCoyoteTime = _currentCoyoteTime - Time.deltaTime;
+            _currentCoyoteTime -= Time.deltaTime;
         }
     }
     #endregion
