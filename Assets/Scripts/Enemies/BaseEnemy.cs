@@ -11,27 +11,19 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected MentalHealth playerMental;
 
-    protected void ApplyDetectionDamage(Collider2D other)
+    protected internal void ApplyDetectionDamage(Collider2D other)
     {
         if (!other.CompareTag("Player"))
             return;
 
-        var mental = other.GetComponent<MentalHealth>();
-        if (mental == null)
-            return;
-
-        mental.TakeDamagePercent(_detectionZoneDamage);
+        PlayerManager.Instance.TryApplyMentalDamagePercent(_detectionZoneDamage);
     }
 
-    protected void ApplyContactDamage(Collider2D other)
+    protected internal void ApplyContactDamage(Collider2D other)
     {
         if (!other.CompareTag("Player"))
             return;
 
-        var mental = other.GetComponent<MentalHealth>();
-        if (mental == null)
-            return;
-
-        mental.TakeDamagePercent(_contactDamage);
+        PlayerManager.Instance.TryApplyMentalDamagePercent(_contactDamage);
     }
 }

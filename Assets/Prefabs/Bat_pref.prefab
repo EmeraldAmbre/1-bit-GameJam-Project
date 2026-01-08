@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6611629823969808132}
   - component: {fileID: 1448967392993937454}
+  - component: {fileID: 15253766158505731}
   m_Layer: 0
   m_Name: DetectionZone
   m_TagString: Untagged
@@ -62,12 +63,24 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &15253766158505731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5574234938606162159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14cef4c526a7ef84691ddd4ee8f1cbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDetectionZone
 --- !u!1 &8211696115162102093
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +233,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -253,4 +266,5 @@ MonoBehaviour:
   _moveSpeed: 3
   _oscillationAmplitude: 1
   _oscillationFrequency: 2
+  _patrolDistance: 4
   _chaseStrength: 2

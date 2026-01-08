@@ -6,6 +6,10 @@ public class BatEnemyAI : BaseEnemy
     [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] private float _oscillationAmplitude = 1f;
     [SerializeField] private float _oscillationFrequency = 2f;
+    [SerializeField] private float _patrolDistance = 5f;
+
+    private Vector2 _origin;
+    private int _direction = 1;
 
     [Header("Aggro")]
     [SerializeField] private float _chaseStrength = 2f;
@@ -18,6 +22,7 @@ public class BatEnemyAI : BaseEnemy
     protected void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _origin = transform.position;
     }
 
     private void FixedUpdate()
@@ -33,9 +38,16 @@ public class BatEnemyAI : BaseEnemy
 
     private Vector2 GetOscillation()
     {
+        float xOffset = transform.position.x - _origin.x;
+
+        if (Mathf.Abs(xOffset) >= _patrolDistance)
+            _direction *= -1;
+
         float y = Mathf.Sin(_time * _oscillationFrequency) * _oscillationAmplitude;
-        return new Vector2(1f, y);
+
+        return new Vector2(_direction, y);
     }
+
 
     private Vector2 GetChaseDirection()
     {
@@ -58,10 +70,5 @@ public class BatEnemyAI : BaseEnemy
     {
         if (other.CompareTag("Player"))
             _player = null;
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        ApplyDetectionDamage(other);
     }
 }
