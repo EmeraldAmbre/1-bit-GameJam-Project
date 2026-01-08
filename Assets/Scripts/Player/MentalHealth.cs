@@ -26,6 +26,15 @@ public class MentalHealth : MonoBehaviour
         OnMentalHealthChanged?.Invoke(NormalizedMentalHealth);
     }
 
+    public void TakeDamagePercent(float percent)
+    {
+        if (percent <= 0f)
+            return;
+
+        float amount = _maxMentalHealth * (percent / 100f);
+        TakeDamage(amount);
+    }
+
     public void Heal(float amount)
     {
         if (amount <= 0f)
