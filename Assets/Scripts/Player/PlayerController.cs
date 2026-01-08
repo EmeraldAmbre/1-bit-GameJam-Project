@@ -114,7 +114,9 @@ public class PlayerController : MonoBehaviour
         if (PlayerManager.Instance.IsPlayerDead)
             return;
 
-        HandleWalkMovement();
+        _animator.SetFloat("Speed", Mathf.Abs(_moveInput.x));
+        _animator.SetBool("IsGrounded", _isGrounded);
+
         HandleJumpBuffering();
         HandleCoyoteJump();
         HandleJump();
@@ -135,18 +137,6 @@ public class PlayerController : MonoBehaviour
     private void OnLampToggle(InputAction.CallbackContext ctx)
     {
         _lamp.ToggleIntensity();
-    }
-
-    private void HandleWalkMovement()
-    {
-        if (Mathf.Abs(_moveInput.x) > 0.01f)
-        {
-            // Turn on run animation :   _animator.SetInteger("playerState", 1);
-        }
-        else
-        {
-            // Turn on idle animation :   if (_isGrounded) _animator.SetInteger("playerState", 0);
-        }
     }
 
     private void HandleFlip()

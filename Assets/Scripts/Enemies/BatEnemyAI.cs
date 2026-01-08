@@ -19,6 +19,9 @@ public class BatEnemyAI : BaseEnemy
 
     private Transform _player;
 
+    [Header("Sprites")]
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+
     protected void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -34,6 +37,11 @@ public class BatEnemyAI : BaseEnemy
 
         Vector2 velocity = (oscillation + chase).normalized * _moveSpeed;
         _rb.linearVelocity = velocity;
+
+        if (_rb.linearVelocity.x != 0)
+        {
+            _spriteRenderer.flipX = _rb.linearVelocity.x < 0;
+        }
     }
 
     private Vector2 GetOscillation()
