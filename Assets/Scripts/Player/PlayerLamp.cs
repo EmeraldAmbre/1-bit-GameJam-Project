@@ -40,3 +40,4 @@ public class PlayerLamp : MonoBehaviour
         Consume(drain);
     }
 }
+ 
