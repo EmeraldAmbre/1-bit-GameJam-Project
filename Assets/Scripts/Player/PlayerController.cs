@@ -3,11 +3,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    private PlayerLamp _lamp;
 
     private Vector2 _moveInput;
     private bool _jumpPressed;
     private bool _jumpHeld;
-    private bool _jumpReleased;
     private bool _isGrounded;
 
     private Rigidbody2D _rigidbody;
@@ -51,11 +51,14 @@ public class PlayerController : MonoBehaviour
 
     private void InitInput()
     {
+        _lamp = GetComponent<PlayerLamp>();
+
         _input = new();
         _input.Player.Jump.started += OnPerformJumpStarted;
         _input.Player.Jump.canceled += OnPerformJumpCanceled;
         _input.Player.Move.performed += OnPerformMove;
         _input.Player.Move.canceled += OnPerformMoveCanceled;
+        _input.Player.Lamp.performed += OnLampToggle;
         _input.Enable();
     }
 
@@ -64,6 +67,7 @@ public class PlayerController : MonoBehaviour
         _input.Player.Jump.started -= OnPerformJumpStarted;
         _input.Player.Jump.canceled -= OnPerformJumpCanceled;
         _input.Player.Move.performed -= OnPerformMove;
+        _input.Player.Lamp.performed -= OnLampToggle;
         _input.Player.Disable();
     }
 
@@ -126,6 +130,11 @@ public class PlayerController : MonoBehaviour
     private void OnPerformMoveCanceled(InputAction.CallbackContext ctx)
     {
         _moveInput = Vector2.zero;
+    }
+
+    private void OnLampToggle(InputAction.CallbackContext ctx)
+    {
+        _lamp.ToggleIntensity();
     }
 
     private void HandleWalkMovement()
@@ -199,7 +208,6 @@ public class PlayerController : MonoBehaviour
     private void OnPerformJumpCanceled(InputAction.CallbackContext ctx)
     {
         _jumpHeld = false;
-        _jumpReleased = true;
         _canJumpHigher = false;
     }
     private void Jump()

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8e2898c8502d0498e8e9a5ba16522a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
+  IsPlayerDead: 0
 --- !u!114 &2083091865132988559
 MonoBehaviour:
   m_ObjectHideFlags: 0
