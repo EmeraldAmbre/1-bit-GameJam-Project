@@ -1,16 +1,29 @@
 using UnityEngine;
 
-public class BaseEnemy : MonoBehaviour
+public abstract class BaseEnemy : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Header("Mental Damage (%)")]
+    [SerializeField, Range(0f, 100f)]
+    protected float _detectionZoneDamage = 2f;
+
+    [SerializeField, Range(0f, 100f)]
+    protected float _contactDamage = 10f;
+
+    protected MentalHealth playerMental;
+
+    protected internal void ApplyDetectionDamage(Collider2D other)
     {
-        
+        if (!other.CompareTag("Player"))
+            return;
+
+        PlayerManager.Instance.TryApplyMentalDamagePercent(_detectionZoneDamage);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected internal void ApplyContactDamage(Collider2D other)
     {
-        
+        if (!other.CompareTag("Player"))
+            return;
+
+        PlayerManager.Instance.TryApplyMentalDamagePercent(_contactDamage);
     }
 }
