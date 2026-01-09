@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3755417271653664742}
   - component: {fileID: 480074327331676}
   - component: {fileID: 7303207875729467624}
+  - component: {fileID: 8373920882248929981}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -323,6 +324,43 @@ PolygonCollider2D:
       - {x: -0.105, y: -0.655}
       - {x: 0.005, y: -0.655}
   m_UseDelaunayMesh: 1
+--- !u!70 &8373920882248929981
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069313611736663066}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.008575439, y: 0.060025334}
+  m_Size: {x: 0.9897766, y: 2.3899496}
+  m_Direction: 0
 --- !u!1 &2268283061572454734
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,8 +575,8 @@ Transform:
   m_GameObject: {fileID: 6995039142127283595}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -1.19, z: 0}
+  m_LocalScale: {x: 0.69, y: 0.09, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7652810672436542036}
