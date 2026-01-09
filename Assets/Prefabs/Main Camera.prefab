@@ -151,5 +151,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   _player: {fileID: 0}
-  _offset: {x: 0, y: 2, z: -10}
+  _offset: {x: 0, y: 0, z: -10}
   _speed: 10
