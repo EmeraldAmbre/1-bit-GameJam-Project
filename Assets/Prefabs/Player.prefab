@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 9153390403115875841}
   - component: {fileID: 3755417271653664742}
   - component: {fileID: 480074327331676}
-  - component: {fileID: 7303207875729467624}
   - component: {fileID: 8373920882248929981}
   m_Layer: 0
   m_Name: Player
@@ -40,7 +39,6 @@ Transform:
   m_Children:
   - {fileID: 1977205668504847439}
   - {fileID: 7106683638474861993}
-  - {fileID: 5969864329908893829}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2752527095015722247
@@ -226,105 +224,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MentalHealth
   _maxMentalHealth: 100
   _currentMentalHealth: 100
---- !u!60 &7303207875729467624
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1069313611736663066}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.51, y: 2.51}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.035, y: -1.0749999}
-      - {x: 0.065, y: -1.235}
-      - {x: 0.074999996, y: -1.255}
-      - {x: 0.114999995, y: -1.255}
-      - {x: 0.13499999, y: -1.245}
-      - {x: 0.255, y: -0.655}
-      - {x: 0.385, y: -0.655}
-      - {x: 0.445, y: -0.635}
-      - {x: 0.49499997, y: -0.60499996}
-      - {x: 0.625, y: -0.555}
-      - {x: 0.755, y: -0.465}
-      - {x: 0.755, y: -0.415}
-      - {x: 0.745, y: -0.345}
-      - {x: 0.515, y: 0.105}
-      - {x: 0.435, y: 0.225}
-      - {x: 0.675, y: 0.225}
-      - {x: 0.705, y: 0.235}
-      - {x: 0.755, y: 0.355}
-      - {x: 0.755, y: 0.565}
-      - {x: 0.675, y: 0.66499996}
-      - {x: 0.645, y: 0.675}
-      - {x: 0.615, y: 0.835}
-      - {x: 0.515, y: 0.92499995}
-      - {x: 0.295, y: 0.825}
-      - {x: 0.285, y: 0.715}
-      - {x: 0.175, y: 0.865}
-      - {x: 0.125, y: 1.035}
-      - {x: 0.024999999, y: 1.2149999}
-      - {x: -0.024999999, y: 1.255}
-      - {x: -0.125, y: 1.255}
-      - {x: -0.175, y: 1.225}
-      - {x: -0.295, y: 1.0649999}
-      - {x: -0.275, y: 0.965}
-      - {x: -0.345, y: 0.885}
-      - {x: -0.36499998, y: 0.85499996}
-      - {x: -0.36499998, y: 0.745}
-      - {x: -0.465, y: 0.45499998}
-      - {x: -0.515, y: 0.235}
-      - {x: -0.655, y: -0.195}
-      - {x: -0.745, y: -0.49499997}
-      - {x: -0.745, y: -0.565}
-      - {x: -0.66499996, y: -0.60499996}
-      - {x: -0.575, y: -0.645}
-      - {x: -0.42499998, y: -0.645}
-      - {x: -0.24499999, y: -0.615}
-      - {x: -0.24499999, y: -0.72499996}
-      - {x: -0.205, y: -1.245}
-      - {x: -0.185, y: -1.255}
-      - {x: -0.13499999, y: -1.255}
-      - {x: -0.114999995, y: -1.2049999}
-      - {x: -0.105, y: -0.655}
-      - {x: 0.005, y: -0.655}
-  m_UseDelaunayMesh: 1
 --- !u!70 &8373920882248929981
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -362,143 +261,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.008575439, y: 0.060025334}
   m_Size: {x: 0.9897766, y: 2.3899496}
   m_Direction: 0
---- !u!1 &1360977314100496227
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5969864329908893829}
-  - component: {fileID: 9104996327647041820}
-  - component: {fileID: 8493461062197506427}
-  - component: {fileID: 5770538312981469858}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5969864329908893829
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360977314100496227}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8, y: 0.5, z: -10}
-  m_LocalScale: {x: 1, y: 0.5, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7652810672436542036}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &9104996327647041820
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360977314100496227}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_Iso: 200
-  m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
-  m_BladeCount: 5
-  m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.25
-  m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 1
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!81 &8493461062197506427
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360977314100496227}
-  m_Enabled: 1
---- !u!114 &5770538312981469858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360977314100496227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_AllowHDROutput: 1
-  m_UseScreenCoordOverride: 0
-  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
-  m_Version: 2
 --- !u!1 &2268283061572454734
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,7 +475,7 @@ Transform:
   m_GameObject: {fileID: 6995039142127283595}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.7, z: 0}
+  m_LocalPosition: {x: -0.025, y: -1.22, z: 0}
   m_LocalScale: {x: 0.69, y: 0.09, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -763,5 +525,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.75, y: 0.4}
   m_EdgeRadius: 0
