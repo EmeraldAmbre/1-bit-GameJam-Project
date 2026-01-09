@@ -14,6 +14,8 @@ public class PlayerLamp : MonoBehaviour
     public float NormalizedEnergy => _currentEnergy / _maxEnergy;
 
     public event Action<float> OnEnergyChanged;
+    public event Action<int> OnLampStateChanged;
+
 
     public int CurrentState => _currentState;
     public int MaxState => _maxState;
@@ -25,7 +27,9 @@ public class PlayerLamp : MonoBehaviour
     public void ToggleIntensity()
     {
         _currentState = (_currentState + 1) % (_maxState + 1);
+        OnLampStateChanged?.Invoke(_currentState);
     }
+
 
     public void Consume(float amount)
     {
