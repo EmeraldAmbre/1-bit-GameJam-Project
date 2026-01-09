@@ -4,34 +4,31 @@ public class LampVisibilityZone : MonoBehaviour
 {
     [SerializeField] private PlayerLamp _lamp;
 
-    [Header("Radius Settings")]
-    [SerializeField] private float _maxRadius = 6f;
-    [SerializeField] private float _minRadius = 1.5f;
-
-    private CircleCollider2D _collider;
+    [Header("Visibility Radius")]
+    [SerializeField] private float _minScale = 5f;
+    [SerializeField] private float _maxScale = 15f;
 
     private void Awake()
     {
-        _collider = GetComponent<CircleCollider2D>();
-
         if (_lamp == null)
-            _lamp = GetComponent<PlayerLamp>();
+            _lamp = GetComponentInParent<PlayerLamp>();
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        _lamp.OnLampStateChanged += UpdateRadius;
-        UpdateRadius(_lamp.CurrentState); // synchro initiale
+        UpdateVisibility();
     }
 
-    private void OnDisable()
+    private void Update()
     {
-        _lamp.OnLampStateChanged -= UpdateRadius;
+        UpdateVisibility();
     }
 
-    private void UpdateRadius(int state)
+    private void UpdateVisibility()
     {
-        float t = (float)state / _lamp.MaxState;
-        _collider.radius = Mathf.Lerp(_maxRadius, _minRadius, t);
+        float t = _lamp.NormalizedIntensity;
+
+        float scale = Mathf.Lerp(_minScale, _maxScale, t);
+        transform.localScale = Vector3.one * scale;
     }
 }
