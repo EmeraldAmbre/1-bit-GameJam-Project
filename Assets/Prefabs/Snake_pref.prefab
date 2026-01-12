@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6250508829807015721}
   m_Layer: 0
   m_Name: DetectionZone
-  m_TagString: Untagged
+  m_TagString: Snake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 6709683953977229035}
   m_Layer: 7
   m_Name: Snake_pref
-  m_TagString: Untagged
+  m_TagString: Snake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

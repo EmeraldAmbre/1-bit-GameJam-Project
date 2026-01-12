@@ -5,7 +5,8 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
-    private AudioSource _audioSource;
+    private AudioSource _sfxSource;
+    private AudioSource _loopSource;
     private Dictionary<string, AudioClip> _clipByName;
     [SerializeField] private List<AudioClip> _soundList;
 
@@ -20,7 +21,12 @@ public class SoundManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        _audioSource = GetComponent<AudioSource>();
+        _sfxSource = gameObject.AddComponent<AudioSource>();
+        _loopSource = gameObject.AddComponent<AudioSource>();
+
+        _loopSource.loop = true;
+        _loopSource.playOnAwake = false;
+
         BuildDictionary();
     }
 
@@ -47,11 +53,29 @@ public class SoundManager : MonoBehaviour
     {
         if (_clipByName.TryGetValue(clipName, out var clip))
         {
-            _audioSource.PlayOneShot(clip);
+            _sfxSource.PlayOneShot(clip);
         }
         else
         {
             Debug.LogWarning($"Sound '{clipName}' not found");
         }
+    }
+
+    public void PlayLoop(string clipName)
+    {
+        if (_loopSource.clip != null && _loopSource.clip.name == clipName)
+            return;
+
+        if (_clipByName.TryGetValue(clipName, out var clip))
+        {
+            _loopSource.clip = clip;
+            _loopSource.Play();
+        }
+    }
+
+    public void StopLoop()
+    {
+        _loopSource.Stop();
+        _loopSource.clip = null;
     }
 }

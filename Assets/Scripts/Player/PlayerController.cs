@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _acceleration = 60f;
     [SerializeField] private float _deceleration = 80f;
 
+    [Header("Footsteps")]
+    [SerializeField] private float _stepInterval = 0.4f;
+    private float _stepTimer;
+
     private bool _isJumpTriggered = false;
     private bool _isJumpgHanndlingTriggered = false;
 
@@ -114,6 +118,8 @@ public class PlayerController : MonoBehaviour
         if (PlayerManager.Instance.IsPlayerDead)
             return;
 
+        HandleFootsteps();
+
         _animator.SetFloat("Speed", Mathf.Abs(_moveInput.x));
         _animator.SetBool("IsGrounded", _isGrounded);
 
@@ -122,6 +128,28 @@ public class PlayerController : MonoBehaviour
         HandleJump();
         HandleGravityChanges();
         HandleFlip();
+    }
+
+    private void HandleFootsteps()
+    {
+        bool isRunning =
+            _isGrounded &&
+            Mathf.Abs(_rigidbody.linearVelocity.x) > 0.1f;
+
+        if (!isRunning)
+        {
+            _stepTimer = 0f;
+            return;
+        }
+
+        _stepTimer -= Time.deltaTime;
+
+        if (_stepTimer <= 0f)
+        {
+            SoundManager.Instance.PlaySound("character_clothes");
+            
+            _stepTimer = _stepInterval;
+        }
     }
 
     private void OnPerformMove(InputAction.CallbackContext ctx)
@@ -137,6 +165,7 @@ public class PlayerController : MonoBehaviour
     private void OnLampToggle(InputAction.CallbackContext ctx)
     {
         _lamp.ToggleIntensity();
+        SoundManager.Instance.PlaySound("character_lantern2");
     }
 
     private void HandleFlip()
@@ -208,13 +237,14 @@ public class PlayerController : MonoBehaviour
         _hasJump = true;
         _currentCoyoteTime = 0;
 
-        SoundManager.Instance.PlaySound("jump_sfx");
+        SoundManager.Instance.PlaySound("character_jump");
     }
     private void HandleJump()
     {
         if (_isGrounded && _hasJump)
         {
             _hasJump = false;
+            SoundManager.Instance.PlaySound("JumpImpact");
         }
 
         if (_jumpPressed && _isGrounded)

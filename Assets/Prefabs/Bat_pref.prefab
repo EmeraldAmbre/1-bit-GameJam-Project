@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 15253766158505731}
   m_Layer: 0
   m_Name: DetectionZone
-  m_TagString: Untagged
+  m_TagString: Bat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,9 +95,9 @@ GameObject:
   - component: {fileID: 5041674048116689230}
   - component: {fileID: 6803430818297628098}
   - component: {fileID: 259466578797999006}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bat_pref
-  m_TagString: Untagged
+  m_TagString: Bat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
