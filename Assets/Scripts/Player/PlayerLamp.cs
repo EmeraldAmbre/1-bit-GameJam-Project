@@ -25,6 +25,9 @@ public class PlayerLamp : MonoBehaviour
 
     public void ToggleIntensity()
     {
+        if (_currentEnergy <= 0f)
+            return;
+
         _currentState = (_currentState + 1) % (_maxState + 1);
         OnLampStateChanged?.Invoke(_currentState);
     }
@@ -43,7 +46,18 @@ public class PlayerLamp : MonoBehaviour
     public void Consume(float amount)
     {
         _currentEnergy = Mathf.Max(0f, _currentEnergy - amount);
+
+        if (_currentEnergy <= 0f)
+        {
+            ForceLowestIntensity();
+        }
+
         OnEnergyChanged?.Invoke(_currentEnergy / _maxEnergy);
+    }
+
+    private void ForceLowestIntensity()
+    {
+        _currentState = _maxState;
     }
 
     private void Update()

@@ -50,7 +50,8 @@ public class SceneTransitionTrigger : MonoBehaviour
     private void LoadNextScene()
     {
         int currentIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentIndex + 1);
+        if (currentIndex == 1) OnLastSceneReached();
+        else SceneManager.LoadScene(currentIndex + 1);
     }
 
     private void LoadSceneByName()
@@ -62,5 +63,18 @@ public class SceneTransitionTrigger : MonoBehaviour
         }
 
         SceneManager.LoadScene(_sceneName);
+    }
+
+    private void OnLastSceneReached()
+    {
+        var data = PlayerPersistentData.Instance;
+        if (data != null)
+        {
+            data.CurrentMentalHealth = 100f;
+            data.CurrentLanternEnergy = 100f;
+            data.LanternState = 0;
+        }
+
+        SceneManager.LoadScene(0);
     }
 }
