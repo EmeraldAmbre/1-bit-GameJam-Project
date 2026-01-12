@@ -30,7 +30,6 @@ public class PlayerManager : MonoBehaviour
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
