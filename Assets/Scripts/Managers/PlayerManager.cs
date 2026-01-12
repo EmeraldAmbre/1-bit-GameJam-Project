@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PlayerManager : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     public bool IsPlayerDead;
+
+    public event System.Action OnPlayerDied;
 
     private void Awake()
     {
@@ -28,6 +31,17 @@ public class PlayerManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Update()
+    {
+        if (IsPlayerDead)
+            return;
+
+        if (_mentalHealth != null && _mentalHealth.IsEmpty)
+        {
+            Die();
+        }
     }
 
     public void TryApplyMentalDamagePercent(float percent)
@@ -56,5 +70,18 @@ public class PlayerManager : MonoBehaviour
         }
 
         _spriteRenderer.enabled = true;
+    }
+
+    private void Die()
+    {
+        IsPlayerDead = true;
+        Time.timeScale = 0f;
+        OnPlayerDied?.Invoke();
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
