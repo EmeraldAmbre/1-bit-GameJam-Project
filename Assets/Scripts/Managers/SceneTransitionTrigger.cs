@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 public class SceneTransitionTrigger : MonoBehaviour
 {
     [Header("Scene Transition")]
-    [SerializeField] private bool loadNextScene = true;
-    [SerializeField] private string sceneName;
+    [SerializeField] private bool _loadNextScene = true;
+    [SerializeField] private string _sceneName;
 
     private bool _triggered = false;
 
@@ -19,13 +19,31 @@ public class SceneTransitionTrigger : MonoBehaviour
 
         _triggered = true;
 
-        if (loadNextScene)
+        SavePlayerState(other);
+
+        if (_loadNextScene)
         {
             LoadNextScene();
         }
         else
         {
             LoadSceneByName();
+        }
+    }
+
+    private void SavePlayerState(Collider2D playerCollider)
+    {
+        var mental = playerCollider.GetComponent<MentalHealth>();
+        var lamp = playerCollider.GetComponent<PlayerLamp>();
+        var data = PlayerPersistentData.Instance;
+
+        if (mental != null)
+            data.CurrentMentalHealth = mental.CurrentValue;
+
+        if (lamp != null)
+        {
+            data.CurrentLanternEnergy = lamp.CurrentEnergy;
+            data.LanternState = lamp.CurrentState;
         }
     }
 
@@ -37,12 +55,12 @@ public class SceneTransitionTrigger : MonoBehaviour
 
     private void LoadSceneByName()
     {
-        if (string.IsNullOrEmpty(sceneName))
+        if (string.IsNullOrEmpty(_sceneName))
         {
             Debug.LogError("SceneTransitionTrigger: sceneName is empty");
             return;
         }
 
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(_sceneName);
     }
 }

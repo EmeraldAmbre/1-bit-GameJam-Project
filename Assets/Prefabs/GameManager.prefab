@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e480f98482b2a46b9a28897dd94960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
-  _soundList: []
+  _soundList:
+  - {fileID: 0}
 --- !u!114 &8946884563512243197
 MonoBehaviour:
   m_ObjectHideFlags: 0

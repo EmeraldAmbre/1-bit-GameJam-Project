@@ -8,8 +8,8 @@ public class MentalHealth : MonoBehaviour
 
     public event Action<float> OnMentalHealthChanged;
 
-    public float NormalizedMentalHealth =>
-        _maxMentalHealth <= 0f ? 0f : _currentMentalHealth / _maxMentalHealth;
+    public float NormalizedMentalHealth => _maxMentalHealth <= 0f ? 0f : _currentMentalHealth / _maxMentalHealth;
+    public float CurrentValue => _currentMentalHealth;
 
     private void Start()
     {
@@ -41,6 +41,12 @@ public class MentalHealth : MonoBehaviour
             return;
 
         _currentMentalHealth = Mathf.Min(_maxMentalHealth, _currentMentalHealth + amount);
+        OnMentalHealthChanged?.Invoke(NormalizedMentalHealth);
+    }
+
+    public void SetCurrentValue(float value)
+    {
+        _currentMentalHealth = Mathf.Clamp(value, 0f, _maxMentalHealth);
         OnMentalHealthChanged?.Invoke(NormalizedMentalHealth);
     }
 

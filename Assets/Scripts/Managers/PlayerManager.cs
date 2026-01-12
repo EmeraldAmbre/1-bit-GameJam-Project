@@ -32,6 +32,26 @@ public class PlayerManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        var data = PlayerPersistentData.Instance;
+        if (data == null)
+            return;
+
+        var mental = GetComponent<MentalHealth>();
+        var lamp = GetComponent<PlayerLamp>();
+
+        if (mental != null)
+            mental.SetCurrentValue(data.CurrentMentalHealth);
+
+        if (lamp != null)
+        {
+            lamp.SetEnergy(data.CurrentLanternEnergy);
+            lamp.SetState(data.LanternState);
+        }
+    }
+
+
     private void Update()
     {
         if (IsPlayerDead)

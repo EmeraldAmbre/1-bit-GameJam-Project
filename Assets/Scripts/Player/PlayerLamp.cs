@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
-using static UnityEngine.InputSystem.Controls.AxisControl;
 
 public class PlayerLamp : MonoBehaviour
 {
@@ -11,6 +9,7 @@ public class PlayerLamp : MonoBehaviour
     [SerializeField] private float _maxEnergy = 100f;
     [SerializeField] private float _currentEnergy = 100f;
 
+    public float CurrentEnergy => _currentEnergy;
     public float NormalizedEnergy => _currentEnergy / _maxEnergy;
 
     public event Action<float> OnEnergyChanged;
@@ -30,6 +29,16 @@ public class PlayerLamp : MonoBehaviour
         OnLampStateChanged?.Invoke(_currentState);
     }
 
+    public void SetEnergy(float value)
+    {
+        _currentEnergy = Mathf.Clamp(value, 0f, _maxEnergy);
+        OnEnergyChanged?.Invoke(_currentEnergy / _maxEnergy);
+    }
+
+    public void SetState(int state)
+    {
+        _currentState = Mathf.Clamp(state, 0, _maxState);
+    }
 
     public void Consume(float amount)
     {
