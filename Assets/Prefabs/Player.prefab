@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3755417271653664742}
   - component: {fileID: 480074327331676}
   - component: {fileID: 8373920882248929981}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 8476029821296928369}
   - component: {fileID: 7614823671565429161}
   - component: {fileID: 12696871084514611}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle
   m_TagString: PlayerVision
   m_Icon: {fileID: 0}
@@ -463,8 +463,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LampVisibilityZone
   _lamp: {fileID: 3755417271653664742}
-  _maxRadius: 6
-  _minRadius: 1.5
+  _minScale: 5
+  _maxScale: 15
 --- !u!1 &6995039142127283595
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +475,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7106683638474861993}
   - component: {fileID: 3553068511323579435}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

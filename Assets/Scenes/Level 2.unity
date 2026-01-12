@@ -9200,11 +9200,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7652810672436542036, guid: 88970b1ba680c9946840165987e1c763, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.07
+      value: 127.41
       objectReference: {fileID: 0}
     - target: {fileID: 7652810672436542036, guid: 88970b1ba680c9946840165987e1c763, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.17
+      value: -30.51
       objectReference: {fileID: 0}
     - target: {fileID: 7652810672436542036, guid: 88970b1ba680c9946840165987e1c763, type: 3}
       propertyPath: m_LocalPosition.z
@@ -31028,6 +31028,10 @@ PrefabInstance:
     - target: {fileID: 5912230704263143323, guid: ef4c87aee58eb6b4e85c7753de691fb2, type: 3}
       propertyPath: m_Name
       value: Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 8530066282533707685, guid: ef4c87aee58eb6b4e85c7753de691fb2, type: 3}
+      propertyPath: _sceneName
+      value: Level 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

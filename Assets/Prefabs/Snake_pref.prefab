@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1469263391843155716}
   - component: {fileID: 6282132880353720530}
-  - component: {fileID: 566213069321010153}
-  m_Layer: 6
+  - component: {fileID: 6250508829807015721}
+  m_Layer: 0
   m_Name: DetectionZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2605741897318131813}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.168, y: -0.608, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14cef4c526a7ef84691ddd4ee8f1cbfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDetectionZone
---- !u!58 &566213069321010153
-CircleCollider2D:
+--- !u!61 &6250508829807015721
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -79,8 +79,18 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.41512108, y: 0.9488487}
-  m_Radius: 2.2790916
+  m_Offset: {x: -0.19161105, y: 0.71970975}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 3.1404347, y: 2.6450512}
+  m_EdgeRadius: 0
 --- !u!1 &7627417952104181295
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +105,7 @@ GameObject:
   - component: {fileID: 7452011995919648574}
   - component: {fileID: 3577069439204310860}
   - component: {fileID: 6709683953977229035}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Snake_pref
   m_TagString: Untagged
   m_Icon: {fileID: 0}
