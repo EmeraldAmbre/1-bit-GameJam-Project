@@ -45,7 +45,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e480f98482b2a46b9a28897dd94960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
-  _soundList: []
+  _soundList:
+  - {fileID: 8300000, guid: f73997bfb32b38b42b8044bc6a80aa3d, type: 3}
+  - {fileID: 8300000, guid: 954ad51d5558a7a419c2867b53a2990a, type: 3}
+  - {fileID: 8300000, guid: 350104d921f0a914794471d8ac83fee0, type: 3}
+  - {fileID: 8300000, guid: 384b120492f71514f913e2b3fb882f25, type: 3}
+  - {fileID: 8300000, guid: f9778a2a60507aa45b4263a0b61d696a, type: 3}
+  - {fileID: 8300000, guid: e4f93383c96d56f4cba443afe048c6cb, type: 3}
+  - {fileID: 8300000, guid: d68d3425b2873b04bbf45174447fd20d, type: 3}
+  - {fileID: 8300000, guid: eadb39aa676950e47bfe02d0a13523a9, type: 3}
+  - {fileID: 8300000, guid: f667e5425e519784795ab7c8542c5c26, type: 3}
+  - {fileID: 8300000, guid: 433325c051f4a78458d24dd18723a7dc, type: 3}
+  - {fileID: 8300000, guid: 51a6394c4babc06448d27158ffa5d6a0, type: 3}
+  - {fileID: 8300000, guid: bef519abad2573848b9c8ee3acc53749, type: 3}
+  - {fileID: 8300000, guid: 06f4c3e381a556d49b2ec994e3bcef50, type: 3}
+  - {fileID: 8300000, guid: 01d2d556846186541bf516e6e44807db, type: 3}
+  - {fileID: 8300000, guid: e210fb64d5a34fd4a83629962ba7a91c, type: 3}
+  - {fileID: 8300000, guid: de840a5292b69674e861669b116d924a, type: 3}
+  - {fileID: 8300000, guid: 6b835d82795a05b48a157016b2e9eb01, type: 3}
 --- !u!114 &8946884563512243197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,4 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 395d3d3cdaa7d04408d2d5d1115cdd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicManager
-  _musicList: []
+  _musicList:
+  - {fileID: 8300000, guid: 067c1f13a2b4235458a54ed6deb4f3fa, type: 3}
+  - {fileID: 8300000, guid: 36ffbd230994a39438cdc2227ff949c9, type: 3}
+  - {fileID: 8300000, guid: 67d65f6fc00e57945854f21f399049c7, type: 3}
