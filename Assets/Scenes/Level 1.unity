@@ -13638,10 +13638,6 @@ PrefabInstance:
       propertyPath: _mentalHealth
       value: 
       objectReference: {fileID: 1322759618}
-    - target: {fileID: 5600734457970126367, guid: ec4b79a4d9bd2f84783ebb8701e43f38, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 6430289661124308017, guid: ec4b79a4d9bd2f84783ebb8701e43f38, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -13658,10 +13654,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8201700939322110709, guid: ec4b79a4d9bd2f84783ebb8701e43f38, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 8794258074519244347, guid: ec4b79a4d9bd2f84783ebb8701e43f38, type: 3}
       propertyPath: m_Name
       value: Canvas
