@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4756198947682002279}
   - component: {fileID: 6969790264939339198}
   - component: {fileID: 5560423869289401299}
-  - component: {fileID: 4458297808233922611}
   m_Layer: 5
   m_Name: GameOver Panel
   m_TagString: Untagged
@@ -37,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0}
-  m_SizeDelta: {x: 1232.1316, y: 506.7304}
+  m_AnchoredPosition: {x: -0.01207, y: 5.6796}
+  m_SizeDelta: {x: 2106, y: 995.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6969790264939339198
 CanvasRenderer:
@@ -60,8 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.09803922, g: 0.2901961, b: 0.50980395, a: 0.392}
+  m_Material: {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -78,18 +77,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4458297808233922611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2109123507982014560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75072f79fc4c91c4893d20d550a6c8f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameOverUI
 --- !u!1 &5395703686149784435
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,8 +151,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4286728729
-  m_fontColor: {r: 0.09803922, g: 0.2901961, b: 0.50980395, a: 1}
+    rgba: 4286139697
+  m_fontColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -347,7 +334,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5959780924413107672}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6637096936094002550}
+        m_TargetAssemblyTypeName: GameOverUI, Assembly-CSharp
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8794258074519244347
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,6 +359,7 @@ GameObject:
   - component: {fileID: 6403282459553623822}
   - component: {fileID: 3902620945629727446}
   - component: {fileID: 402084536709260514}
+  - component: {fileID: 6637096936094002550}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -451,6 +451,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6637096936094002550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8794258074519244347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75072f79fc4c91c4893d20d550a6c8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameOverUI
+  _panel: {fileID: 2109123507982014560}
 --- !u!1 &8859630862166783447
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,6 +693,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hud
       objectReference: {fileID: 0}
+    - target: {fileID: 5602401000414313898, guid: 7c0332cf8e44b8f4bbe388673daa6198, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 5602401000414313898, guid: 7c0332cf8e44b8f4bbe388673daa6198, type: 3}
+      propertyPath: m_Color.g
+      value: 0.3019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 5602401000414313898, guid: 7c0332cf8e44b8f4bbe388673daa6198, type: 3}
+      propertyPath: m_Color.r
+      value: 0.19215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 5602401000414313898, guid: 7c0332cf8e44b8f4bbe388673daa6198, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5909548917387169844, guid: 7c0332cf8e44b8f4bbe388673daa6198, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -696,6 +725,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8202251030712131904, guid: 7c0332cf8e44b8f4bbe388673daa6198, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 8202251030712131904, guid: 7c0332cf8e44b8f4bbe388673daa6198, type: 3}
+      propertyPath: m_Color.g
+      value: 0.3019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 8202251030712131904, guid: 7c0332cf8e44b8f4bbe388673daa6198, type: 3}
+      propertyPath: m_Color.r
+      value: 0.19215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 8202251030712131904, guid: 7c0332cf8e44b8f4bbe388673daa6198, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

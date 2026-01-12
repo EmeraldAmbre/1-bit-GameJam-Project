@@ -1,25 +1,27 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GameOverUI : MonoBehaviour
 {
+    [SerializeField] GameObject _panel;
     private void Awake()
     {
-        gameObject.SetActive(false);
+        _panel.SetActive(false);
     }
 
-    private void OnEnable()
+    private void Start()
     {
         PlayerManager.Instance.OnPlayerDied += Show;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         PlayerManager.Instance.OnPlayerDied -= Show;
     }
 
     private void Show()
     {
-        gameObject.SetActive(true);
+        _panel.SetActive(true);
     }
 
     public void Restart()
