@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4087126032196098241}
   - component: {fileID: 2083091865132988559}
   - component: {fileID: 8946884563512243197}
+  - component: {fileID: 8199938642255477055}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -79,3 +80,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 067c1f13a2b4235458a54ed6deb4f3fa, type: 3}
   - {fileID: 8300000, guid: 36ffbd230994a39438cdc2227ff949c9, type: 3}
   - {fileID: 8300000, guid: 67d65f6fc00e57945854f21f399049c7, type: 3}
+--- !u!114 &8199938642255477055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597345538732976885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1da3087742fd0cb4c804225da065dcfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPersistentData
+  CurrentMentalHealth: 100
+  CurrentLanternEnergy: 100
+  LanternState: 0
