@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
@@ -6,10 +7,19 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Vector3 _offset = new Vector3(0, 2, -10);
     [SerializeField] private float _speed = 10f;
 
-    private void Awake()
+    private void OnEnable()
     {
-        if (_player == null)
-            _player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        _player = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
 
     private void LateUpdate()
