@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -77,5 +78,37 @@ public class SoundManager : MonoBehaviour
     {
         _loopSource.Stop();
         _loopSource.clip = null;
+    }
+
+    public void PlayTimedSound(string clipName, float duration, float fadeOutTime)
+    {
+        if (!_clipByName.TryGetValue(clipName, out var clip))
+            return;
+
+        StartCoroutine(PlayTimedRoutine(clip, duration, fadeOutTime));
+    }
+
+    private IEnumerator PlayTimedRoutine(AudioClip clip, float duration, float fadeOutTime)
+    {
+        _loopSource.clip = clip;
+        _loopSource.volume = 1f;
+        _loopSource.loop = false;
+        _loopSource.Play();
+
+        yield return new WaitForSeconds(duration);
+
+        float startVolume = _loopSource.volume;
+        float t = 0f;
+
+        while (t < fadeOutTime)
+        {
+            t += Time.deltaTime;
+            _loopSource.volume = Mathf.Lerp(startVolume, 0f, t / fadeOutTime);
+            yield return null;
+        }
+
+        _loopSource.Stop();
+        _loopSource.clip = null;
+        _loopSource.volume = 1f;
     }
 }

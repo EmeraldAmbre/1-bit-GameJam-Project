@@ -16,7 +16,6 @@ public class LightEnemyAudio : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"Light trigger entered by: {other.name}, tag={other.tag}");
         string clip = GetClipForTag(other.tag);
         if (clip == null)
             return;

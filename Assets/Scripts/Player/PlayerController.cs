@@ -165,7 +165,6 @@ public class PlayerController : MonoBehaviour
     private void OnLampToggle(InputAction.CallbackContext ctx)
     {
         _lamp.ToggleIntensity();
-        SoundManager.Instance.PlaySound("character_lantern2");
     }
 
     private void HandleFlip()

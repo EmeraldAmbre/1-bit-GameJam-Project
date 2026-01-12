@@ -29,6 +29,9 @@ public class PlayerLamp : MonoBehaviour
             return;
 
         _currentState = (_currentState + 1) % (_maxState + 1);
+
+        SoundManager.Instance.PlayTimedSound("character_lantern2", duration: 3f, fadeOutTime: 0.5f);
+
         OnLampStateChanged?.Invoke(_currentState);
     }
 
